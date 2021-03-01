@@ -4,6 +4,7 @@ from scipy import stats as ss
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
+from analysis import quantize
 from Useful_function import stand 
 from sklearn.preprocessing import normalize
 
@@ -109,3 +110,22 @@ def get_hidden_states(perf = 1, show_destrib = False, show_states = False):
 		plotTimeSeries(y.reshape(len(y),1), states, 'subj time', perf = perf)
 
 	return states
+
+def from_npz_to_states (npzfile,name_savefile, res=1, measure='subjtime',delaytime=1, save=False):
+	measr = np.load(npzfile)[measure]
+	# Quantization
+	subt = quantize(measr, res=res, delaytime=delaytime)
+	y, states, mus, sigmas, P = fit_HMM(subt)
+
+	idx_states_0 = np.where(states==0)[0]
+	idx_states_1 = np.where(states==1)[0]
+
+	y_0 = y[idx_states_0]
+	y_1 = y[idx_states_1]
+
+	print('mean state==0', np.mean(y_0), 'mean state==1', np.mean(y_1))
+
+	if save == True:
+		np.savez(name_savefile, x=states)
+
+	return y, states, mus, sigmas, P
