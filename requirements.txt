@@ -1,0 +1,10 @@
+hmmlearn
+scipy
+seaborn
+matplotlib
+numpy
+mne
+librosa
+imblearn
+statannot
+tqdm
