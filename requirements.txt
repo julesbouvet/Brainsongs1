@@ -8,3 +8,8 @@ librosa
 imblearn
 statannot
 tqdm
+soundfile
+sklearn
+scikit_posthocs
+statsmodels
+cookiecutter
