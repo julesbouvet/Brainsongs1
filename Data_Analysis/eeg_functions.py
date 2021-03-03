@@ -146,10 +146,11 @@ def eeg_rms_analysis(eeg_npzfile, rms_npzfile):
 
     pass
 
-# rms_audio('audio_data/caroleeg_perf2.wav', sampling_rate=None, frame_length=2048, save=True, savename='rms/rms_every_instruments_perf2')
-# nb_onsets_npzfile = 'nb_onsets/onsets_for_eeg_perf3_44100.npz'
-# eeg_npzfile = 'EEG/eeg_perf3.npz'
-# rms_npzfile = 'rms/rms_every_instruments_perf3_44100.npz'
+if __name__ == '__main__':
+    # rms_audio('audio_data/caroleeg_perf2.wav', sampling_rate=None, frame_length=2048, save=True, savename='rms/rms_every_instruments_perf2')
+    # nb_onsets_npzfile = 'nb_onsets/onsets_for_eeg_perf3_44100.npz'
+    # eeg_npzfile = 'EEG/eeg_perf3.npz'
+    # rms_npzfile = 'rms/rms_every_instruments_perf3_44100.npz'
 
-# eeg_rms_analysis(eeg_npzfile, rms_npzfile)
-# eeg_note_density_analysis(eeg_npzfile, nb_onsets_npzfile)
+    # eeg_rms_analysis(eeg_npzfile, rms_npzfile)
+    # eeg_note_density_analysis(eeg_npzfile, nb_onsets_npzfile)
