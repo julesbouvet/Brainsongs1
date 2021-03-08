@@ -28,6 +28,21 @@ Data analysis:
 We conducted a time-frequency analysis using Morlet Wavelet to compute the correlation between the subjective time feedback and the evolution of power of different frequency bands (alpha, beta and theta) in time.
 Then we tried the Spoc algorithm [3] to see if we could predict the variable subjective time with the EEG signal. 
 
+## Data Analysis
+
+### Aim of this analysis :
+The aim of this additional analysis was to characterize the density (number of notes played every second) and volume of the musical performance of CR on the three performances and to assess their impact on Subjective Time Resolution (STR) and EEG rhythms. This analysis was performed separately for each performance.   
+
+### Method for estimating note density :
+First, we separated the different musical instruments recording before counting notes. For each performance there were three instruments: clarinet (CR), drums and double bass for the first two performances and clarinet, double bass and trumpet for the third performances. As we are focusing on the performance of CR (specifically, the number of notes he played) we separated the clarinet from the two other instruments. We used the 4 stem source separation pretrained model from the library Spleeter (Stoter et al. 2018, Hennequin et al. 2020) developed and open-sourced by Deezer (https://github.com/deezer/spleeter). Spleeter allowed us to split music instruments leveraging pre-trained neural networks implemented in TensorFlow.  Next, note onset detection was performed on the clarinet track separated during step 1. For this, we used an onset_detection method available in the librosa package  (https://librosa.org/doc/main/generated/librosa.onset.onset_detect.html#librosa.onset.onset_detect) that works by detecting local peaks in the envelope strength, using hyperparameters set on a large music database (https://github.com/CPJKU/onset_db). We validated note density  extraction qualitatively by retrieving several samples for each note density bin and checked qualitatively if the note density was well estimated.   
+
+### Analysis between note density and STR :
+Then, we assessed the impact of note density during the musical performance on behavioral (STR). First, we estimated the distribution of note density values across performances. As there are many moments during which CR does not play, we get an important proportion of note density values of 0. However, non-zero density values followed an approximately gaussian distribution, that we binned in three categories according to XXXX. We tested the hypothesis whether CR plays more notes per second in low or high STR by performing a Wilcoxon test on non zero note densities. We also compare qualitatively the count of note densities equal to zero (i.e. moments during which CR does not play for one second) in low and high STR. We also tested the hypothesis that the volume of CR musical performance was related to STR. To this end we calculated the RMS energy of each performance using the librosa function librosa.rms() and compared RMS distributions for low and high STR using Welch's t-test.   
+
+### Analysis between note density and EEG :
+Finally, to assess if note density had a significant impact on EEG power in different frequency bands we used the four above mentioned categories: silence (note density equal to zero), low density, medium density and high density, and computed alpha, beta and theta EEG power in each category. We tested for associations between power and note density using a Kruskall Wallis test, and performed pairwise  t-tests for post-hoc comparisons.
+
+
 ## References
 [1] A. Gramfort, M. Luessi, E. Larson, D. Engemann, D. Strohmeier, C. Brodbeck, R. Goj, M. Jas, T. Brooks, L. Parkkonen, M. Hämäläinen, MEG and EEG data analysis with MNE-Python, Frontiers in Neuroscience, Volume 7, 2013, ISSN 1662-453X, [DOI]
 
